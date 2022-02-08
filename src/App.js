@@ -10,7 +10,7 @@ function App() {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [panier, setPanier] = useState([]);
-
+  const [counter, setCounter] = useState(0);
   // function addToPanier() {
   //   const newPanier = [...panier];
   //   newPanier.push(meal.description);
@@ -49,8 +49,12 @@ function App() {
                           <div
                             onClick={() => {
                               const newPanier = [...panier];
-                              newPanier.push(meal);
-                              setPanier(newPanier);
+                              meal.quantity = 1;
+                              counter >= 1 ? (setCounter (counter +1)
+                    ) : ( newPanier.push(meal);
+                              setPanier(newPanier);)
+
+                             
                             }}
                           >
                             <Cases meal={meal} />
@@ -69,6 +73,7 @@ function App() {
               {panier.map((elem, index) => {
                 return (
                   <div key={index}>
+                    <span>{elem.quantity}</span>
                     <span>{elem.title}</span>
                     <span>{elem.price}</span>
                   </div>
