@@ -11,14 +11,11 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [panier, setPanier] = useState([]);
 
-  function tableau() {
-    alert("ça réagit mother fucker");
-  }
-  function addToPanier() {
-    const newPanier = [...panier];
-    newPanier.push(1);
-    setPanier(newPanier);
-  }
+  // function addToPanier() {
+  //   const newPanier = [...panier];
+  //   newPanier.push(meal.description);
+  //   setPanier(newPanier);
+  // }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +29,7 @@ function App() {
     fetchData();
   }, []);
 
-  console.log(data);
+  // console.log(data);
   return isLoading ? (
     <span>En cours de chargement... </span>
   ) : (
@@ -49,7 +46,13 @@ function App() {
                     <div className="entreCases">
                       {mealtype.meals.map((meal) => {
                         return (
-                          <div onClick={tableau} onClick={addToPanier}>
+                          <div
+                            onClick={() => {
+                              const newPanier = [...panier];
+                              newPanier.push(meal);
+                              setPanier(newPanier);
+                            }}
+                          >
                             <Cases meal={meal} />
                           </div>
                         );
@@ -62,7 +65,16 @@ function App() {
           </div>
           <div className="validerCase">
             <button className="button">Valider mon panier</button>
-            <div>{newPanier}</div>
+            <div>
+              {panier.map((elem, index) => {
+                return (
+                  <div key={index}>
+                    <span>{elem.title}</span>
+                    <span>{elem.price}</span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
