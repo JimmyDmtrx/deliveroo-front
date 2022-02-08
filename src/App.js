@@ -11,6 +11,15 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [panier, setPanier] = useState([]);
 
+  function tableau() {
+    alert("ça réagit mother fucker");
+  }
+  function addToPanier() {
+    const newPanier = [...panier];
+    newPanier.push(1);
+    setPanier(newPanier);
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
@@ -40,7 +49,7 @@ function App() {
                     <div className="entreCases">
                       {mealtype.meals.map((meal) => {
                         return (
-                          <div>
+                          <div onClick={tableau} onClick={addToPanier}>
                             <Cases meal={meal} />
                           </div>
                         );
@@ -53,6 +62,7 @@ function App() {
           </div>
           <div className="validerCase">
             <button className="button">Valider mon panier</button>
+            <div>{newPanier}</div>
           </div>
         </div>
       </div>
